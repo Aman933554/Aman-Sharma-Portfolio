@@ -12,6 +12,7 @@ import OSNav from "@/components/OSNav";
 import AIAssistant from "@/components/AIAssistant";
 import Terminal from "@/components/Terminal";
 import RecruiterMode from "@/components/RecruiterMode";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -30,15 +31,16 @@ export default function Home() {
       
       {/* Main OS Content */}
       <div className="relative z-10 flex flex-col items-center w-full">
-        <Hero />
-        <About />
-        <Journey />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Certifications />
-        <Contact />
+        <div id="home" className="w-full"><Hero /></div>
+        <div id="about" className="w-full"><About /></div>
+        <div id="journey" className="w-full"><Journey /></div>
+        <div id="skills" className="w-full"><Skills /></div>
+        <div id="projects" className="w-full"><Projects /></div>
+        <div id="experience" className="w-full"><Experience /></div>
+        <div id="certificates" className="w-full"><Certifications /></div>
+        <div id="contact-section" className="w-full"><Contact /></div>
       </div>
+      <Footer />
     </main>
   );
 }

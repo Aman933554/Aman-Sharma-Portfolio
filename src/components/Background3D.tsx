@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
 // @ts-expect-error - no types available for maath random esm path
@@ -8,7 +8,27 @@ import * as random from "maath/random/dist/maath-random.esm";
 import * as THREE from "three";
 
 function NeuralParticles(props: any) {
-  const ref = useRef<THREE.Points>(null);
+  const pointsRef = useRef<THREE.Points>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  const mouse = useRef({ x: 0, y: 0 });
+  const isReducedMotion = useRef(false);
+
+  useEffect(() => {
+    // Check for touch device or reduced motion preferences
+    isReducedMotion.current = 
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches || 
+      window.matchMedia("(pointer: coarse)").matches;
+    
+    const handleMouseMove = (event: MouseEvent) => {
+      if (isReducedMotion.current) return;
+      // Normalize mouse coordinates from -1 to 1
+      mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
   
   // Generate 5000 random points inside a sphere
   const sphere = useMemo(() => {
@@ -16,21 +36,34 @@ function NeuralParticles(props: any) {
   }, []);
 
   useFrame((state, delta) => {
-    if (ref.current) {
-      ref.current.rotation.x -= delta / 10;
-      ref.current.rotation.y -= delta / 15;
+    if (pointsRef.current) {
+      // Base continuous rotation (slow and steady)
+      pointsRef.current.rotation.x -= delta / 25;
+      pointsRef.current.rotation.y -= delta / 30;
+    }
+
+    if (groupRef.current && !isReducedMotion.current) {
+      // Cinematic mouse parallax effect (subtle offset)
+      // Limit the max rotation to a very small angle
+      const targetX = (mouse.current.y * Math.PI) / 40;
+      const targetY = (mouse.current.x * Math.PI) / 40;
+
+      // Smooth, slow interpolation with high inertia
+      groupRef.current.rotation.x += 0.02 * (targetX - groupRef.current.rotation.x);
+      groupRef.current.rotation.y += 0.02 * (targetY - groupRef.current.rotation.y);
     }
   });
 
   return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere as Float32Array} stride={3} frustumCulled={false} {...props}>
+    <group ref={groupRef} rotation={[0, 0, Math.PI / 4]}>
+      <Points ref={pointsRef} positions={sphere as Float32Array} stride={3} frustumCulled={false} {...props}>
         <PointMaterial
           transparent
           color="#00E5FF" // Neon Blue
           size={0.005}
           sizeAttenuation={true}
           depthWrite={false}
+          blending={THREE.AdditiveBlending}
         />
       </Points>
     </group>
@@ -44,15 +77,15 @@ export default function Background3D() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0A0A0A]/90 to-[#050505] z-0" />
       
       {/* 3D Canvas */}
-      <div className="absolute inset-0 z-10 opacity-60">
+      <div className="absolute inset-0 z-10 opacity-60 mix-blend-screen">
         <Canvas camera={{ position: [0, 0, 1] }}>
           <NeuralParticles />
         </Canvas>
       </div>
 
-      {/* Decorative Glow Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-neon-purple/20 rounded-full blur-[100px] z-0 animate-pulse" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-neon-blue/20 rounded-full blur-[100px] z-0 animate-pulse" style={{ animationDelay: '2s' }} />
+      {/* Subtle Aurora & Decorative Glow Orbs */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-neon-purple/20 rounded-full blur-[120px] z-0 mix-blend-screen animate-pulse" style={{ animationDuration: '8s' }} />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-neon-blue/20 rounded-full blur-[120px] z-0 mix-blend-screen animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
     </div>
   );
 }

@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Futuristic AI Operating System Portfolio of Aman Sharma, an aspiring AI Engineer.",
 };
 
+import CustomCursor from "@/components/CustomCursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,6 +25,7 @@ export default function RootLayout({
       className={`${inter.variable} dark`}
     >
       <body className="antialiased min-h-screen bg-background text-foreground overflow-x-hidden">
+        <CustomCursor />
         {children}
       </body>
     </html>

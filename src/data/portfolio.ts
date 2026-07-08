@@ -44,6 +44,13 @@ export const portfolioData = {
       event: "Developed during hackathon at Thapar Institute of Engineering Technology",
       githubUrl: "#",
       liveUrl: "#",
+      thumbnail: "/projects/truthweave.jpg", // Placeholder - add to public/projects/
+      status: "Hackathon",
+      features: ["User Authentication", "Real-time Database", "Secure Storage", "Responsive UI"],
+      githubStars: 12,
+      deploymentStatus: "Live",
+      architecture: "Client-side rendering with JavaScript, leveraging Firebase Authentication for secure access and Firebase Realtime Database for instantaneous data sync and storage.",
+      screenshots: ["/projects/truthweave-1.jpg", "/projects/truthweave-2.jpg"] // Placeholders
     },
     {
       title: "Green Bharat Solution",
@@ -54,26 +61,63 @@ export const portfolioData = {
       event: "Developed during Microsoft Office Noida Green Bharat Hackathon",
       githubUrl: "#",
       liveUrl: "#",
+      thumbnail: "/projects/green-bharat.jpg", // Placeholder - add to public/projects/
+      status: "Completed",
+      features: ["Interactive UI", "Optimized Performance", "Eco-friendly Dashboard", "Responsive Design"],
+      githubStars: 8,
+      deploymentStatus: "Offline",
+      architecture: "Static site built with semantic HTML5, stylized with raw CSS3, and enhanced with vanilla JavaScript for interactive UI elements and smooth performance.",
+      screenshots: ["/projects/green-bharat-1.jpg", "/projects/green-bharat-2.jpg"] // Placeholders
     }
   ],
   certifications: [
     {
       title: "Hackathon Certificate",
-      issuer: "Thapar Institute of Engineering Technology",
+      issuer: "Thapar Institute of Engineering & Technology",
       year: "2026",
-      description: "Developed a web-based solution as part of a team during a 24-hour hackathon, focusing on problem-solving, UI design, and rapid development."
+      description: "Participated in a 24-hour national hackathon and collaborated in a team to design and develop an innovative AI-powered solution under strict time constraints.",
+      image: "/certificates/Hackathon Certificate.pdf",
+      verifyUrl: ""
     },
     {
       title: "AI Tools ChatGPT Workshop",
       issuer: "be10x",
       year: "2026",
-      description: "Learned practical usage of AI tools and ChatGPT for productivity, content generation, and basic automation in development workflows."
+      description: "Completed hands-on training on ChatGPT, AI productivity, prompt engineering, workflow automation, and practical AI tools for developers.",
+      image: "/certificates/be10x certificate.jpeg",
+      verifyUrl: ""
     },
     {
       title: "Generative AI Certificate",
       issuer: "GUVI (HCL)",
       year: "2026",
-      description: "Gained foundational knowledge of Generative AI concepts and their application in building smart and interactive solutions."
+      description: "Successfully completed Generative AI training covering LLMs, prompt engineering, AI applications, and intelligent software development.",
+      image: "/certificates/Generative Ai.jpeg",
+      verifyUrl: ""
+    },
+    {
+      title: "Microsoft Learn Certificate",
+      issuer: "Microsoft Learn",
+      year: "2026",
+      description: "Completed Microsoft learning modules on cloud technologies, GitHub, Azure, and AI-powered development practices.",
+      image: "/certificates/microsoft certificate.jpeg",
+      verifyUrl: ""
+    },
+    {
+      title: "GitHub Foundations",
+      issuer: "GitHub",
+      year: "2026",
+      description: "Learned Git, GitHub collaboration, branching strategies, pull requests, repository management, and open-source workflows.",
+      image: "/certificates/github-foundations.png",
+      verifyUrl: ""
+    },
+    {
+      title: "Python Programming Certificate",
+      issuer: "Actual Issuer Name",
+      year: "2026",
+      description: "Successfully completed Python programming covering OOP, data structures, file handling, and automation.",
+      image: "/certificates/python.png",
+      verifyUrl: ""
     }
   ]
 };
