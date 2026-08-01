@@ -7,7 +7,6 @@ export const portfolioData = {
     phone: "+91-9335542811",
     linkedin: "https://linkedin.com/in/aman-sharma-20b7012a0",
     github: "https://github.com/Aman933554",
-    leetcode: "https://leetcode.com/u/Aman933554/",
   },
   education: {
     degree: "B.Tech Computer Science Engineering",
