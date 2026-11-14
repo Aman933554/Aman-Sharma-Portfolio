@@ -181,7 +181,7 @@ export default function Hero() {
 
             <div className="mt-12 mb-6 w-full aspect-square rounded-2xl overflow-hidden border border-foreground/5 relative bg-black/10 shadow-inner">
               <Image 
-                src="/profile2.jpg" 
+                src="/WhatsApp Image 2026-11-14 at 8.32.42 PM - Copy.jpeg" 
                 alt="Aman Sharma" 
                 fill 
                 sizes="(max-width: 768px) 100vw, 400px"
